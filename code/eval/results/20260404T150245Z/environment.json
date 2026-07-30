@@ -1,0 +1,11 @@
+{
+  "python_version": "3.11.15 (main, Mar  3 2026, 15:47:15) [Clang 21.1.4 ]",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "processor": "arm",
+  "nostr_sdk_version": "0.44.2",
+  "coincurve_version": "21.0.0",
+  "pymacaroons_version": "0.13.0",
+  "timestamp": "2026-04-04T16:31:22.567151+00:00",
+  "random_seed": 42
+}

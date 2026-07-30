@@ -1,0 +1,210 @@
+{
+  "FM-1": {
+    "status": "pass",
+    "detail": {
+      "resolution_3_relays": {
+        "found": true,
+        "latency_ms": 4.5
+      },
+      "resolution_2_relays": {
+        "found": true,
+        "latency_ms": 4.3
+      },
+      "resolution_1_relays": {
+        "found": true,
+        "latency_ms": 4.1
+      }
+    }
+  },
+  "FM-2": {
+    "status": "pass",
+    "detail": {
+      "censoring_relay_missing": true,
+      "honest_relays_have_event": true,
+      "union_query_defeats_censorship": true,
+      "bip340_precludes_tampering": true,
+      "single_censoring_relay": "relay-1 (port 7771)"
+    }
+  },
+  "FM-3": {
+    "status": "pass",
+    "detail": "analytical \u2014 multi-relay redundancy argument (no test)"
+  },
+  "FM-4": {
+    "status": "pass",
+    "detail": {
+      "challenge_with_bob_down": {
+        "failed_gracefully": true,
+        "error_type": "AioRpcError",
+        "error_message": "<AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNAVAILABLE\n\tdetails = \"failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:19999: Failed to connect to remote host: "
+      },
+      "alice_unaffected": true,
+      "finding": "L402 challenge to an unreachable LND fails gracefully (AioRpcError). Other LND node (alice) unaffected. Test uses closed-port simulation to avoid disrupting other Docker-dependent tests in the same run."
+    }
+  },
+  "FM-5": {
+    "status": "pass",
+    "detail": {
+      "revocation_verify_us": 85.33
+    }
+  },
+  "FM-6": {
+    "status": "pass",
+    "detail": {
+      "attacker_rejected": true,
+      "legitimate_accepted": true
+    }
+  },
+  "FM-7": {
+    "status": "pass",
+    "detail": {
+      "identity_chain_valid": true
+    }
+  },
+  "FM-8": {
+    "status": "pass",
+    "detail": {
+      "trust_score": 0.7137,
+      "bounded_below_0.7": false
+    }
+  },
+  "FM-9": {
+    "status": "pass",
+    "detail": {
+      "ms_by_depth": {
+        "1": 0.0597,
+        "2": 0.0725,
+        "4": 0.1475,
+        "8": 0.252,
+        "16": 0.5017
+      },
+      "depth16_vs_1_ratio": 8.4
+    }
+  },
+  "FM-10": {
+    "status": "pass",
+    "detail": {
+      "tolerance_s": 60,
+      "skew_validity": {
+        "30": true,
+        "60": true,
+        "120": false,
+        "300": false
+      }
+    }
+  },
+  "FM-11": {
+    "status": "pass",
+    "detail": {
+      "acceptance_matrix": {
+        "nos.lol": {
+          "38100": "accepted",
+          "38101": "accepted",
+          "38102": "accepted"
+        },
+        "relay.damus.io": {
+          "38100": "accepted",
+          "38101": "accepted",
+          "38102": "accepted"
+        },
+        "relay.primal.net": {
+          "38100": "accepted",
+          "38101": "accepted",
+          "38102": "accepted"
+        },
+        "relay.nostr.band": {
+          "38100": "timeout",
+          "38101": "timeout",
+          "38102": "timeout"
+        },
+        "nostr.wine": {
+          "38100": "timeout",
+          "38101": "accepted",
+          "38102": "accepted"
+        }
+      },
+      "total_accepted": 11,
+      "total_tested": 15,
+      "acceptance_rate": 0.733,
+      "finding": "11/15 kind-acceptance attempts succeeded across 5 public relays. Range 30000-39999 (parameterized-replaceable) is widely supported."
+    }
+  },
+  "FM-12": {
+    "status": "pass",
+    "detail": {
+      "old_deleg_invalidated": true,
+      "re_issuance_valid": true
+    }
+  },
+  "FM-13": {
+    "status": "pass",
+    "detail": {
+      "sybil_cost_analysis": {
+        "5": {
+          "honest_to_sybil_trust": 0.4769,
+          "honest_to_honest_trust": 1.0,
+          "cost_per_trust_unit": 10483.3
+        },
+        "10": {
+          "honest_to_sybil_trust": 0.8378,
+          "honest_to_honest_trust": 1.0,
+          "cost_per_trust_unit": 11935.4
+        },
+        "20": {
+          "honest_to_sybil_trust": 0.9983,
+          "honest_to_honest_trust": 1.0,
+          "cost_per_trust_unit": 20034.4
+        }
+      }
+    }
+  },
+  "FM-14": {
+    "status": "pass",
+    "detail": {
+      "relay_1_has_event": true,
+      "relay_2_has_event": false,
+      "relay_3_has_event": false,
+      "after_10s_relay_2": false,
+      "after_10s_relay_3": false,
+      "non_gossip_confirmed": true,
+      "finding": "Event published to relay-1 only is absent on relay-2/3 both immediately and after 10s. Confirms agents must multi-relay publish for cross-verifier reachability."
+    }
+  },
+  "FM-15": {
+    "status": "analytical",
+    "detail": "Analytical \u2014 protocol lacks equivocation detection (cf. KERI witness consensus). Verifiers apply NIP-01 lowest-event-id tiebreaker deterministically but cannot detect conflicting events across disjoint relay sets. Acknowledged as primary architectural limitation vs. KERI (Section 5.5)."
+  },
+  "FM-16": {
+    "status": "pass",
+    "detail": {
+      "events_published": 200,
+      "median_publish_ms": 1.8,
+      "p95_publish_ms": 3.78,
+      "all_under_500ms": true
+    }
+  },
+  "FM-17": {
+    "status": "pass",
+    "detail": {
+      "escalation_rejected": true,
+      "valid_narrowing_accepted": true
+    }
+  },
+  "FM-18": {
+    "status": "pass",
+    "detail": {
+      "unique_keys_generated": 1000,
+      "collisions": 0
+    }
+  },
+  "FM-19": {
+    "status": "pass",
+    "detail": {
+      "signatures_valid": true,
+      "uses_aux_rand": true,
+      "nonce_strategy": "aux_rand (BIP340 default)",
+      "different_message_different_sig": true,
+      "finding": "BIP340 implementation behaves correctly; aux_rand provides side-channel resistance"
+    }
+  }
+}

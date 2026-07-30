@@ -1,0 +1,27 @@
+{
+  "round1": {
+    "alpha_importance": 0.8759,
+    "alpha_difficulty": 0.7083,
+    "alpha_average": 0.7921,
+    "alpha_average_bootstrap_95ci": [
+      0.5524,
+      0.9052
+    ],
+    "fleiss_kappa_joint": 0.4578
+  },
+  "round2": {
+    "alpha_importance": 1.0,
+    "alpha_difficulty": 0.8776,
+    "alpha_average": 0.9388,
+    "alpha_average_bootstrap_95ci": [
+      0.7812,
+      1.0
+    ],
+    "fleiss_kappa_joint": 0.7769
+  },
+  "paper_claims": {
+    "section": "Section 5.2 (RQ1)",
+    "krippendorff_alpha": "Round 2 alpha = 0.94 averaged across importance and difficulty; reproduced by round2.alpha_average",
+    "fleiss_kappa": "Round 2 kappa = 0.78 (Round 1: 0.46) on joint categories; reproduced by round2.fleiss_kappa_joint and round1.fleiss_kappa_joint"
+  }
+}

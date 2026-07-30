@@ -1,0 +1,75 @@
+[project]
+name = "nostr-agent"
+version = "0.1.0"
+description = "NostrAgent: Decentralized Identity and Delegation Architecture for Sovereign Agentic Systems"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "nostr-sdk==0.44.2",
+    "coincurve>=21.0.0",
+    "pymacaroons>=0.13.0",
+    "httpx>=0.27.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "grpcio>=1.60.0",
+    "protobuf>=4.25.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "hypothesis>=6.90",
+    "websockets>=12.0",
+    "fastapi>=0.110.0",
+    "docker>=7.0",
+]
+eval = [
+    "scipy>=1.12.0",
+    "numpy>=1.26.0",
+    "matplotlib>=3.8.0",
+    "networkx>=3.2",
+]
+dev = [
+    "nostr-agent[test,eval]",
+    "ruff>=0.3.0",
+    "mypy>=1.8.0",
+]
+
+[project.scripts]
+nostr-agent = "nostr_agent.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nostr_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "unit: fast tests without Docker",
+    "integration: requires Docker relay/LND infrastructure",
+    "adversarial: STRIDE adversarial test procedures (TP-01 through TP-09)",
+    "property: Hypothesis property-based tests (attenuation + trust invariants)",
+    "slow: runtime > 5s",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+ignore = ["ANN101", "ANN102", "ANN401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["nostr_agent"]
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["nostr_sdk.*", "pymacaroons.*", "l402.*", "coincurve.*", "grpc.*"]
+ignore_missing_imports = true

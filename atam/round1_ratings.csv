@@ -1,0 +1,13 @@
+item_id,expert_a,expert_b,expert_c
+S1,"H,H","H,H","H,H"
+S2,"H,M","H,M","H,M"
+S3,"H,H","H,M","H,H"
+S4,"M,L","M,M","M,L"
+O1,"H,M","H,M","M,M"
+O2,"M,M","M,M","M,L"
+O3,"H,M","H,M","H,M"
+O4,"M,L","M,L","M,L"
+T1,"H,L","H,L","H,M"
+T2,"H,H","H,H","H,H"
+T3,"H,M","H,H","H,H"
+T4,"M,M","M,L","L,L"

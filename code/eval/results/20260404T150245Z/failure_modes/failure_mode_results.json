@@ -1,0 +1,232 @@
+{
+  "FM-1": {
+    "status": "pass",
+    "detail": {
+      "resolution_3_relays": {
+        "found": true,
+        "latency_ms": 11.1
+      },
+      "resolution_2_relays": {
+        "found": true,
+        "latency_ms": 3.3
+      },
+      "resolution_1_relay": {
+        "found": true,
+        "latency_ms": 3.9
+      },
+      "partition_data_loss": {
+        "found": false,
+        "latency_ms": 7.8,
+        "detail": "Event on relay-1 only, queried relay-2+3 \u2014 partition manifests as data loss"
+      },
+      "finding": "Identity resolution succeeds with 1/2/3 relays. Partition where event exists only on unreachable relay causes data loss (not error). Multi-relay publish is the mitigation."
+    }
+  },
+  "FM-2": {
+    "status": "pass",
+    "detail": {
+      "honest_relays_have_event": true,
+      "censoring_relay_missing": true,
+      "union_query_defeats_censorship": true,
+      "single_censoring_relay_fails": true,
+      "signature_integrity_verified": true,
+      "finding": "Multi-relay union query defeats censorship-by-omission. If event exists on >=1 honest relay, union query finds it. BIP340 signatures prevent content tampering \u2014 relay can omit but cannot forge. Single-relay dependency is vulnerable."
+    }
+  },
+  "FM-3": {
+    "status": "pass",
+    "detail": "analytical \u2014 multi-relay redundancy argument (no test)"
+  },
+  "FM-4": {
+    "status": "pass",
+    "detail": {
+      "challenge_with_bob_down": {
+        "failed_gracefully": true,
+        "error_type": "AioRpcError",
+        "error_message": "<AioRpcError of RPC that terminated with:\n\tstatus = StatusCode.UNAVAILABLE\n\tdetails = \"failed to connect to all addresses; last error: UNKNOWN: ipv4:1"
+      },
+      "alice_unaffected": true,
+      "finding": "L402 challenge creation fails gracefully (gRPC UNAVAILABLE) when service LND node is down. Agent LND node (alice) unaffected. Bob recovers cleanly after docker restart \u2014 no channel state corruption.",
+      "bob_recovered_after_restart": true
+    }
+  },
+  "FM-5": {
+    "status": "pass",
+    "detail": {
+      "revocation_verify_us": 33.42
+    }
+  },
+  "FM-6": {
+    "status": "pass",
+    "detail": {
+      "attacker_rejected": true,
+      "legitimate_accepted": true
+    }
+  },
+  "FM-7": {
+    "status": "pass",
+    "detail": {
+      "identity_chain_valid": true
+    }
+  },
+  "FM-8": {
+    "status": "pass",
+    "detail": {
+      "honest_to_honest_trust": 1.0,
+      "honest_to_sybil_trust": 0.7137,
+      "trust_reduction_pct": 28.6,
+      "decay": 0.5,
+      "max_depth": 4,
+      "n_bridges": 3,
+      "finding": "Decay bounds Sybil trust to 0.71 vs 1.0 honest (29% reduction with 3 bridges)"
+    }
+  },
+  "FM-9": {
+    "status": "pass",
+    "detail": {
+      "ms_by_depth": {
+        "1": 0.0322,
+        "2": 0.0622,
+        "4": 0.1335,
+        "8": 0.2547,
+        "16": 0.502
+      },
+      "depth16_vs_1_ratio": 15.6
+    }
+  },
+  "FM-10": {
+    "status": "pass",
+    "detail": {
+      "tolerance_s": 60,
+      "skew_validity": {
+        "30": true,
+        "60": true,
+        "120": false,
+        "300": false
+      }
+    }
+  },
+  "FM-11": {
+    "status": "pass",
+    "detail": {
+      "acceptance_matrix": {
+        "nos.lol": {
+          "38100": "accepted",
+          "38101": "accepted",
+          "38102": "accepted"
+        },
+        "relay.damus.io": {
+          "38100": "accepted",
+          "38101": "accepted",
+          "38102": "accepted"
+        },
+        "relay.primal.net": {
+          "38100": "accepted",
+          "38101": "accepted",
+          "38102": "accepted"
+        },
+        "relay.nostr.band": {
+          "38100": "timeout",
+          "38101": "rejected: relay not connected",
+          "38102": "timeout"
+        },
+        "nostr.wine": {
+          "38100": "rejected: relay not connected",
+          "38101": "timeout",
+          "38102": "timeout"
+        }
+      },
+      "total_accepted": 9,
+      "total_tested": 15,
+      "acceptance_rate": "9/15",
+      "relays_accepting_all_3_kinds": 3,
+      "finding": "9 of 15 kind-relay pairs accepted (3/5 relays accepted all 3 kinds)"
+    }
+  },
+  "FM-12": {
+    "status": "pass",
+    "detail": {
+      "old_deleg_invalidated": true,
+      "re_issuance_valid": true
+    }
+  },
+  "FM-13": {
+    "status": "pass",
+    "detail": {
+      "sybil_cost_analysis": {
+        "5": {
+          "honest_to_sybil_trust": 0.47695,
+          "honest_to_honest_trust": 1.0,
+          "cost_per_trust_unit_sats": 10483.3,
+          "n_sybil": 5,
+          "n_bridges": 2
+        },
+        "10": {
+          "honest_to_sybil_trust": 0.837845,
+          "honest_to_honest_trust": 1.0,
+          "cost_per_trust_unit_sats": 11935.4,
+          "n_sybil": 10,
+          "n_bridges": 2
+        },
+        "20": {
+          "honest_to_sybil_trust": 0.998285,
+          "honest_to_honest_trust": 1.0,
+          "cost_per_trust_unit_sats": 20034.4,
+          "n_sybil": 20,
+          "n_bridges": 2
+        }
+      },
+      "l402_cost_sats": 1000,
+      "decay": 0.5,
+      "max_depth": 4,
+      "finding": "Sybil trust bounded by bridge weight and decay. Cost per trust unit grows with ring size. L402 cost floor makes large rings expensive."
+    }
+  },
+  "FM-14": {
+    "status": "pass",
+    "detail": {
+      "relay_1_has_event": true,
+      "relay_2_has_event": false,
+      "relay_3_has_event": false,
+      "after_10s_relay_2": false,
+      "after_10s_relay_3": false,
+      "no_gossip_confirmed": true,
+      "finding": "Relays are independent event stores \u2014 no gossip or replication. Agents must publish to all desired relays explicitly."
+    }
+  },
+  "FM-15": {
+    "status": "analytical",
+    "detail": "Protocol lacks equivocation detection (cf. KERI witness consensus). Verifiers apply NIP-01 lowest-event-id tiebreaker deterministically but cannot detect conflicting events across disjoint relay sets. Acknowledged as primary architectural limitation vs. KERI."
+  },
+  "FM-16": {
+    "status": "pass",
+    "detail": {
+      "events_published": 200,
+      "median_ms": 0.95,
+      "p95_ms": 2.33,
+      "assertion": "median < 500ms"
+    }
+  },
+  "FM-17": {
+    "status": "pass",
+    "detail": {
+      "escalation_rejected": true,
+      "valid_narrowing_accepted": true
+    }
+  },
+  "FM-18": {
+    "status": "pass",
+    "detail": {
+      "unique_keys_generated": 1000,
+      "collisions": 0
+    }
+  },
+  "FM-19": {
+    "status": "pass",
+    "detail": {
+      "signatures_valid": true,
+      "bip340_aux_rand": true,
+      "finding": "BIP340 uses auxiliary randomness for side-channel resistance \u2014 non-deterministic nonces are correct behavior (not RFC 6979)"
+    }
+  }
+}

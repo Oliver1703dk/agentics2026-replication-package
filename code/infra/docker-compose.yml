@@ -1,0 +1,165 @@
+# NostrAgent development infrastructure
+# 3 strfry relays + 2 LND nodes + 1 bitcoind (regtest)
+#
+# Usage:
+#   docker compose up -d
+#   ./scripts/bootstrap.sh   # Fund wallets, open channels
+#   docker compose down -v   # Teardown with volume cleanup
+#
+# Port mapping (host -> container):
+#   bitcoind  18443 -> 18443  (regtest RPC)
+#   lnd-alice 10009 -> 10009  (gRPC), 8080 -> 8080 (REST)
+#   lnd-bob   10010 -> 10009  (gRPC), 8081 -> 8080 (REST)
+#   relay-1   7771  -> 7777   (WebSocket)
+#   relay-2   7772  -> 7777   (WebSocket)
+#   relay-3   7773  -> 7777   (WebSocket)
+
+networks:
+  nostragent:
+    driver: bridge
+
+volumes:
+  bitcoind-data:
+  lnd-alice-data:
+  lnd-bob-data:
+  relay1-data:
+  relay2-data:
+  relay3-data:
+
+###############################################################################
+# bitcoind (regtest)
+###############################################################################
+services:
+  bitcoind:
+    image: lncm/bitcoind:v27.0
+    container_name: nostragent-bitcoind
+    restart: unless-stopped
+    networks: [nostragent]
+    volumes:
+      - bitcoind-data:/data/.bitcoin
+      - ./config/bitcoin.conf:/data/.bitcoin/bitcoin.conf:ro
+    ports:
+      - "18443:18443"   # regtest RPC
+      - "18444:18444"   # P2P
+    healthcheck:
+      test: ["CMD", "bitcoin-cli", "-regtest", "-rpcuser=nostr", "-rpcpassword=nostr", "getblockchaininfo"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+###############################################################################
+# LND -- alice (Agent node)
+###############################################################################
+  lnd-alice:
+    image: lightninglabs/lnd:v0.18.4-beta
+    container_name: nostragent-lnd-alice
+    restart: unless-stopped
+    depends_on:
+      bitcoind:
+        condition: service_healthy
+    networks: [nostragent]
+    volumes:
+      - lnd-alice-data:/root/.lnd
+      - ./config/lnd-alice.conf:/root/.lnd/lnd.conf:ro
+    ports:
+      - "10009:10009"   # gRPC
+      - "8080:8080"     # REST
+      - "9735:9735"     # p2p
+    command: >
+      --lnddir=/root/.lnd
+      --configfile=/root/.lnd/lnd.conf
+    healthcheck:
+      test: ["CMD", "lncli", "--network=regtest", "--rpcserver=localhost:10009",
+             "--tlscertpath=/root/.lnd/tls.cert",
+             "--macaroonpath=/root/.lnd/data/chain/bitcoin/regtest/admin.macaroon",
+             "getinfo"]
+      interval: 15s
+      timeout: 10s
+      retries: 12
+      start_period: 30s
+
+###############################################################################
+# LND -- bob (Service node)
+###############################################################################
+  lnd-bob:
+    image: lightninglabs/lnd:v0.18.4-beta
+    container_name: nostragent-lnd-bob
+    restart: unless-stopped
+    depends_on:
+      bitcoind:
+        condition: service_healthy
+    networks: [nostragent]
+    volumes:
+      - lnd-bob-data:/root/.lnd
+      - ./config/lnd-bob.conf:/root/.lnd/lnd.conf:ro
+    ports:
+      - "10010:10009"   # gRPC (host 10010 -> container 10009)
+      - "8081:8080"     # REST
+      - "9736:9735"     # p2p
+    command: >
+      --lnddir=/root/.lnd
+      --configfile=/root/.lnd/lnd.conf
+    healthcheck:
+      test: ["CMD", "lncli", "--network=regtest", "--rpcserver=localhost:10009",
+             "--tlscertpath=/root/.lnd/tls.cert",
+             "--macaroonpath=/root/.lnd/data/chain/bitcoin/regtest/admin.macaroon",
+             "getinfo"]
+      interval: 15s
+      timeout: 10s
+      retries: 12
+      start_period: 30s
+
+###############################################################################
+# strfry relays (3 instances -- host ports 7771-7773, container port 7777)
+###############################################################################
+  relay-1:
+    image: dockurr/strfry:1.0.4
+    container_name: nostragent-relay-1
+    restart: unless-stopped
+    networks: [nostragent]
+    volumes:
+      - relay1-data:/app/strfry-db
+      - ./config/strfry.conf:/etc/strfry.conf:ro
+    ports:
+      - "7771:7777"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7777"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+
+  relay-2:
+    image: dockurr/strfry:1.0.4
+    container_name: nostragent-relay-2
+    restart: unless-stopped
+    networks: [nostragent]
+    volumes:
+      - relay2-data:/app/strfry-db
+      - ./config/strfry.conf:/etc/strfry.conf:ro
+    ports:
+      - "7772:7777"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7777"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+
+  relay-3:
+    image: dockurr/strfry:1.0.4
+    container_name: nostragent-relay-3
+    restart: unless-stopped
+    networks: [nostragent]
+    volumes:
+      - relay3-data:/app/strfry-db
+      - ./config/strfry.conf:/etc/strfry.conf:ro
+    ports:
+      - "7773:7777"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7777"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
