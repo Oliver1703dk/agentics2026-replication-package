@@ -15,7 +15,7 @@ file is authoritative. Files without a header fall under the scope rule above.
 MIT License (applies to source code, scripts, and configuration)
 ================================================================================
 
-Copyright (c) 2026 Anonymous Authors (names withheld for double-blind review)
+Copyright (c) 2026 Oliver Aleksander Larsen and Mahyar Tourchi Moghaddam
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -70,10 +70,11 @@ Deed summary:   https://creativecommons.org/licenses/by/4.0/
 Full legalcode: https://creativecommons.org/licenses/by/4.0/legalcode
 
 Citation under CC BY 4.0:
-  Anonymous Authors. "NostrAgent: A Decentralized Identity and Delegation
-  Architecture for Sovereign Agentic Systems." Under double-blind review.
-  Author names, venue, repository URL, and Zenodo DOI will be inserted at
-  camera-ready.
+  Oliver Aleksander Larsen and Mahyar Tourchi Moghaddam. "NostrAgent: A
+  Decentralized Identity and Delegation Architecture for Sovereign Agentic
+  Systems." Accepted as a Full Paper at AIPAA 2026 (AGENTICS / IJCCI 2026).
+  Repository: https://github.com/Oliver1703dk/agentics2026-replication-package
+  Zenodo DOI: to be minted from tag v1.0.
 
 ================================================================================
 Notes on third-party content

@@ -3,7 +3,8 @@
 Reference implementation, evaluation harness, and expert-panel data for:
 
 > **NostrAgent: A Decentralized Identity and Delegation Architecture for Sovereign Agentic Systems**  
-> Anonymized artifact for double-blind review; author details will be restored at camera-ready.
+> Oliver Aleksander Larsen and Mahyar Tourchi Moghaddam  
+> Accepted as a Full Paper at AIPAA 2026 (AGENTICS / IJCCI 2026).
 
 NostrAgent is an *operator-sovereign* identity and delegation architecture for
 autonomous agents, built on BIP340 Schnorr signatures, Nostr relays for
@@ -22,14 +23,16 @@ infrastructure required to reproduce every quantitative claim in Section 5.
 
 |         |                                                            |
 | ------- | ---------------------------------------------------------- |
-| Stage   | Double-blind submission: AGENTICS, special session AI Agents: Progress, Architecture, and Applications (AIPAA, IJCCI); anonymized artifact |
+| Stage   | Camera-ready artifact: AIPAA 2026 Full Paper (AGENTICS / IJCCI 2026), paper #8 |
+| Authors | Oliver Aleksander Larsen, Mahyar Tourchi Moghaddam (SDU Software Engineering) |
 | License | MIT for code; CC BY 4.0 for data and prose. See `LICENSE`. |
-| DOI     | minted at camera-ready (Zenodo)                            |
-| Tag     | `v1.0` will mark the camera-ready snapshot                 |
+| DOI     | Zenodo DOI to be minted from GitHub release `v1.0`         |
+| Tag     | `v1.0` marks this camera-ready snapshot                    |
 
 
-The Data Availability section of the paper points at this repository URL now and
-will be rewritten to a Zenodo DOI at camera-ready.
+The paper Data Availability section points at this repository
+(`https://github.com/Oliver1703dk/agentics2026-replication-package`)
+and will add the Zenodo DOI once minted.
 
 ---
 
@@ -111,14 +114,20 @@ mainnet Lightning, deployment infrastructure. Boundaries are documented in
 
 ## Citation
 
-Citation details are withheld for double-blind review. A `CITATION.cff`
-with author names and the Zenodo DOI will be added at camera-ready.
+See `CITATION.cff`. After the Zenodo DOI is minted, update that file and cite:
+
+```
+Larsen, O. A., & Moghaddam, M. T. (2026). NostrAgent: A Decentralized Identity
+and Delegation Architecture for Sovereign Agentic Systems (Version 1.0)
+[Computer software]. https://github.com/Oliver1703dk/agentics2026-replication-package
+```
 
 ---
 
 ## Contact
 
-Withheld for double-blind review; restored at camera-ready.
+Oliver Aleksander Larsen (`olar@mmmi.sdu.dk`) and Mahyar Tourchi Moghaddam
+(`mtmo@mmmi.sdu.dk`), SDU Software Engineering, University of Southern Denmark.
 
 ---
 
@@ -130,5 +139,5 @@ Data, prose, and panel materials under `atam/` and the `README.md` files:
 CC BY 4.0. See `LICENSE` for the full text and the precise scope.
 
 The regtest credentials under `code/infra/credentials/` are synthetic, carry
-zero monetary value, and exist only so a reviewer can bring up the L402 path
+zero monetary value, and exist only so a reader can bring up the L402 path
 on a fresh machine. They are not real-world keys.

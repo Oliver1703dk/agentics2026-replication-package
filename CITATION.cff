@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "NostrAgent: A Decentralized Identity and Delegation Architecture for Sovereign Agentic Systems"
+version: "1.0"
+date-released: "2026-09-11"
+type: software
+authors:
+  - family-names: Larsen
+    given-names: Oliver Aleksander
+    orcid: "https://orcid.org/0009-0003-6944-2560"
+    email: olar@mmmi.sdu.dk
+    affiliation: "SDU Software Engineering, University of Southern Denmark"
+  - family-names: Moghaddam
+    given-names: Mahyar Tourchi
+    orcid: "https://orcid.org/0000-0001-5028-7546"
+    email: mtmo@mmmi.sdu.dk
+    affiliation: "SDU Software Engineering, University of Southern Denmark"
+repository-code: "https://github.com/Oliver1703dk/agentics2026-replication-package"
+license: MIT
+keywords:
+  - AI agents
+  - decentralized identity
+  - Nostr
+  - BIP340
+  - L402
+  - scoped delegation
+identifiers: []
+# Add Zenodo DOI after minting, e.g.:
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
