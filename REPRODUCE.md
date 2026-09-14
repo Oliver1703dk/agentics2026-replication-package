@@ -236,7 +236,8 @@ records all five.
 | 2026-04-28 (re-run) | (same submission) | (unchanged) | reproducibility re-run shipped under `code/eval/results/20260428T203508Z/`; ships the SP-1 through SP-5 sensitivity files under the paper's nomenclature and the dedicated `SP4_prerotation_*.csv` |
 | 2026-07-22 (revision) | (same submission) | (unchanged) | anonymized double-blind artifact; panel materials consolidated under `atam/` (rating instrument, raw ratings, combined alpha + kappa recomputation) |
 | 2026-09-11 | `v1.0` | (unchanged) | camera-ready release: authors restored, `CITATION.cff` added |
-| 2026-09-14 | `v1.0.1` | (unchanged) | Zenodo DOI minted: https://doi.org/10.5281/zenodo.22744263 |
+| 2026-09-14 | `v1.0.1` | (unchanged) | Zenodo DOI minted (version DOI 10.5281/zenodo.22744263) |
+| 2026-09-14 | `v1.0.2` | (unchanged) | docs polish: CITATION.cff includes concept DOI https://doi.org/10.5281/zenodo.22744262 |
 
 The frozen run was produced by `code/eval/run_full_evaluation.py` on 2026-04-04
 (UTC) and contains: B1..B11 benchmark CSVs under `benchmarks/`,
