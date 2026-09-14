@@ -26,13 +26,13 @@ infrastructure required to reproduce every quantitative claim in Section 5.
 | Stage   | Camera-ready artifact: AIPAA 2026 Full Paper (AGENTICS / IJCCI 2026), paper #8 |
 | Authors | Oliver Aleksander Larsen, Mahyar Tourchi Moghaddam (SDU Software Engineering) |
 | License | MIT for code; CC BY 4.0 for data and prose. See `LICENSE`. |
-| DOI     | Zenodo DOI to be minted from GitHub release `v1.0`         |
-| Tag     | `v1.0` marks this camera-ready snapshot                    |
+| DOI     | https://doi.org/10.5281/zenodo.22744263                    |
+| Tag     | `v1.0.1` (camera-ready; Zenodo from this release)          |
 
 
 The paper Data Availability section points at this repository
 (`https://github.com/Oliver1703dk/agentics2026-replication-package`)
-and will add the Zenodo DOI once minted.
+and at the Zenodo archive (`https://doi.org/10.5281/zenodo.22744263`).
 
 ---
 
@@ -114,12 +114,12 @@ mainnet Lightning, deployment infrastructure. Boundaries are documented in
 
 ## Citation
 
-See `CITATION.cff`. After the Zenodo DOI is minted, update that file and cite:
+See `CITATION.cff`. Cite as:
 
 ```
 Larsen, O. A., & Moghaddam, M. T. (2026). NostrAgent: A Decentralized Identity
-and Delegation Architecture for Sovereign Agentic Systems (Version 1.0)
-[Computer software]. https://github.com/Oliver1703dk/agentics2026-replication-package
+and Delegation Architecture for Sovereign Agentic Systems (Version 1.0.1)
+[Computer software]. Zenodo. https://doi.org/10.5281/zenodo.22744263
 ```
 
 ---
